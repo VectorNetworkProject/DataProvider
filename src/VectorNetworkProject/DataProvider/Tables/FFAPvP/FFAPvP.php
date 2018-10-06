@@ -16,6 +16,7 @@ class FFAPvP extends TableBase
 	public const FFAPVP_INIT = 'userdataprovider.ffapvp.init';
 	public const FFAPVP_REGISTER = 'userdataprovider.ffapvp.register';
 	public const FFAPVP_UNREGISTER = 'userdataprovider.ffapvp.unregister';
+	public const FFAPVP_ADD_COUNT = 'userdataprovider.ffapvp.addcount';
 	public const FFAPVP_GET_RANKING_BY_KILL = 'userdataprovider.ffapvp.getrankingbykill';
 	public const FFAPVP_GET_RANKING_BY_EXP = 'userdataprovider.ffapvp.getrankingbyexp';
 
@@ -47,6 +48,13 @@ class FFAPvP extends TableBase
 	public function unregister(IPLayer $player, ?callable $onSuccess = null, ?callable $onError = null): void
 	{
 		$this->connector->executeChange(self::FFAPVP_UNREGISTER, [$player->getName()], $onSuccess, $onError );
+	}
+
+
+	public function addCount(IPlayer $player, int $kill, int $death, int $exp, callable $onSelect, ?callable $onError = null): void
+	{
+		$this->connector->executeGeneric(self::FFAPVP_ADD_COUNT, [$kill, $death, $exp], $onSelect, $onError);
+
 	}
 
 	/**
