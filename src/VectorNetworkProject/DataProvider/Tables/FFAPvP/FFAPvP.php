@@ -53,7 +53,7 @@ class FFAPvP extends TableBase
 
 	public function addCount(IPlayer $player, int $kill, int $death, int $exp, callable $onSelect, ?callable $onError = null): void
 	{
-		$this->connector->executeGeneric(self::FFAPVP_ADD_COUNT, [$kill, $death, $exp], $onSelect, $onError);
+		$this->connector->executeGeneric(self::FFAPVP_ADD_COUNT, [$player->getName(), $kill, $death, $exp], $onSelect, $onError);
 
 	}
 
